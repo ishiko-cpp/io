@@ -1,0 +1,20 @@
+setting ISHIKO_CPP_IO_ROOT
+{
+    help = "Path to the Ishiko/C++ IO installation";
+    default = '$(ISHIKO_CPP)/io';
+}
+
+template IshikoIO
+{
+    includedirs += $(ISHIKO_CPP_IO_ROOT)/include;
+
+    if ($(toolset) == gnu)
+    {
+        libdirs += $(ISHIKO_CPP_IO_ROOT)/lib;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        libdirs += $(ISHIKO_CPP_IO_ROOT)/lib/$(arch);
+    }
+}
