@@ -20,7 +20,7 @@
     <ClInclude Include="..\..\include\Ishiko\IO.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Ishiko\Memory\linkoptions.hpp">
+    <ClInclude Include="..\..\include\Ishiko\IO\linkoptions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -31,6 +31,6 @@ library IshikoIO
     headers
     {
         ../../include/Ishiko/IO.hpp
-        ../../include/Ishiko/Memory/linkoptions.hpp
+        ../../include/Ishiko/IO/linkoptions.hpp
     }
 }

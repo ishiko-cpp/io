@@ -151,7 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Ishiko\IO.hpp" />
-    <ClInclude Include="..\..\include\Ishiko\Memory\linkoptions.hpp" />
+    <ClInclude Include="..\..\include\Ishiko\IO\linkoptions.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
