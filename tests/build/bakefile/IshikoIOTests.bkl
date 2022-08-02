@@ -17,7 +17,7 @@ program IshikoIOTests : IshikoIO, IshikoTestFrameworkCore
     if ($(toolset) == gnu)
     {
         cxx-compiler-options = "-std=c++11";
-        libs += IshikoTestFrameworkCore IshikoConfiguration IshikoXML IshikoProcess;
+        libs += IshikoTestFrameworkCore IshikoConfiguration IshikoXML IshikoProcess IshikoText IshikoErrors;
         libs += boost_filesystem;
     }
 
