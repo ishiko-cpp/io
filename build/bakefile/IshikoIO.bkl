@@ -35,11 +35,15 @@ library IshikoIO : IshikoErrors
     {
         ../../include/Ishiko/IO.hpp
         ../../include/Ishiko/IO/IOErrorCategory.hpp
+        ../../include/Ishiko/IO/IOErrorExtension.hpp
         ../../include/Ishiko/IO/linkoptions.hpp
+        ../../include/Ishiko/IO/StreamUtilities.hpp
     }
 
     sources
     {
         ../../src/IOErrorCategory.cpp
+        ../../src/IOErrorExtension.cpp
+        ../../src/StreamUtilities.cpp
     }
 }

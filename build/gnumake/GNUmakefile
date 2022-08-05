@@ -71,12 +71,18 @@ ISHIKO_CPP_ERRORS_ROOT ?= $(ISHIKO_CPP)/errors
 
 all: ../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoIO-d,IshikoIO).a
 
-../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoIO-d,IshikoIO).a: $(_builddir)IshikoIO_IOErrorCategory.o
-	$(AR) rc $@ $(_builddir)IshikoIO_IOErrorCategory.o
+../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoIO-d,IshikoIO).a: $(_builddir)IshikoIO_IOErrorCategory.o $(_builddir)IshikoIO_IOErrorExtension.o $(_builddir)IshikoIO_StreamUtilities.o
+	$(AR) rc $@ $(_builddir)IshikoIO_IOErrorCategory.o $(_builddir)IshikoIO_IOErrorExtension.o $(_builddir)IshikoIO_StreamUtilities.o
 	$(RANLIB) $@
 
 $(_builddir)IshikoIO_IOErrorCategory.o: ../../src/IOErrorCategory.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I../../include/Ishiko/IO -std=c++11 ../../src/IOErrorCategory.cpp
+
+$(_builddir)IshikoIO_IOErrorExtension.o: ../../src/IOErrorExtension.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I../../include/Ishiko/IO -std=c++11 ../../src/IOErrorExtension.cpp
+
+$(_builddir)IshikoIO_StreamUtilities.o: ../../src/StreamUtilities.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I../../include/Ishiko/IO -std=c++11 ../../src/StreamUtilities.cpp
 
 clean:
 	rm -f $(_builddir)*.o

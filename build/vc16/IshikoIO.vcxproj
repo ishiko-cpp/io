@@ -151,11 +151,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\IOErrorCategory.cpp" />
+    <ClCompile Include="..\..\src\IOErrorExtension.cpp" />
+    <ClCompile Include="..\..\src\StreamUtilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Ishiko\IO.hpp" />
     <ClInclude Include="..\..\include\Ishiko\IO\IOErrorCategory.hpp" />
+    <ClInclude Include="..\..\include\Ishiko\IO\IOErrorExtension.hpp" />
     <ClInclude Include="..\..\include\Ishiko\IO\linkoptions.hpp" />
+    <ClInclude Include="..\..\include\Ishiko\IO\StreamUtilities.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
