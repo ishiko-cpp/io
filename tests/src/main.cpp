@@ -4,14 +4,40 @@
     See https://github.com/ishiko-cpp/io/blob/main/LICENSE.txt
 */
 
+#include "IOErrorExtensionTests.hpp"
+#include "StreamUtilitiesTests.hpp"
 #include "Ishiko/IO/linkoptions.hpp"
 #include <Ishiko/TestFramework/Core.hpp>
+#include <exception>
 
 using namespace Ishiko;
 
 int main(int argc, char* argv[])
 {
-    TestHarness theTestHarness("IshikoIO");
+    try
+    {
+        TestHarness::CommandLineSpecification commandLineSpec;
+        commandLineSpec.setDefaultValue("context.data", "../../data");
+        commandLineSpec.setDefaultValue("context.output", "../../output");
+        commandLineSpec.setDefaultValue("context.reference", "../../reference");
 
-    return theTestHarness.run();
+        Configuration configuration = commandLineSpec.createDefaultConfiguration();
+        CommandLineParser::parse(commandLineSpec, argc, argv, configuration);
+
+        TestHarness theTestHarness("Ishiko/C++ IO Library Tests", configuration);
+
+        TestSequence& theTests = theTestHarness.tests();
+        theTests.append<IOErrorExtensionTests>();
+        theTests.append<StreamUtilitiesTests>();
+
+        return theTestHarness.run();
+    }
+    catch (const std::exception& e)
+    {
+        return TestApplicationReturnCode::exception;
+    }
+    catch (...)
+    {
+        return TestApplicationReturnCode::exception;
+    }
 }
