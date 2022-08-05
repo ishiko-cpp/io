@@ -33,6 +33,11 @@ override CXXFLAGS += -O2
 else ifneq (,$(config))
 $(warning Unknown configuration "$(config)")
 endif
+#
+# Additionally, this makefile is customizable with the following
+# settings:
+#
+#      ISHIKO_CPP_ERRORS_ROOT  Path to the Ishiko Errors installation
 
 # Use "make RANLIB=''" for platforms without ranlib.
 RANLIB ?= ranlib
@@ -45,13 +50,46 @@ _false :=
 _not    = $(if $(1),$(_false),$(_true_))
 _equal  = $(and $(findstring $(1),$(2)),$(findstring $(2),$(1)))
 
+
+# The directory for the build files, may be overridden on make command line.
+builddir = .
+
+ifneq ($(builddir),.)
+_builddir := $(if $(findstring $(abspath $(builddir)),$(builddir)),,../../)$(builddir)/../gnumake/
+_builddir_error := $(shell mkdir -p $(_builddir) 2>&1)
+$(if $(_builddir_error),$(error Failed to create build directory: $(_builddir_error)))
+endif
+
+# ------------
+# Configurable settings:
+# 
+
+# Path to the Ishiko Errors installation
+ISHIKO_CPP_ERRORS_ROOT ?= $(ISHIKO_CPP)/errors
+
+# ------------
+
 all: ../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoIO-d,IshikoIO).a
 
-../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoIO-d,IshikoIO).a:
-	$(AR) rc $@ 
+../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoIO-d,IshikoIO).a: $(_builddir)IshikoIO_IOErrorCategory.o $(_builddir)IshikoIO_IOErrorExtension.o $(_builddir)IshikoIO_StreamUtilities.o
+	$(AR) rc $@ $(_builddir)IshikoIO_IOErrorCategory.o $(_builddir)IshikoIO_IOErrorExtension.o $(_builddir)IshikoIO_StreamUtilities.o
 	$(RANLIB) $@
 
+$(_builddir)IshikoIO_IOErrorCategory.o: ../../src/IOErrorCategory.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I../../include/Ishiko/IO -std=c++11 ../../src/IOErrorCategory.cpp
+
+$(_builddir)IshikoIO_IOErrorExtension.o: ../../src/IOErrorExtension.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I../../include/Ishiko/IO -std=c++11 ../../src/IOErrorExtension.cpp
+
+$(_builddir)IshikoIO_StreamUtilities.o: ../../src/StreamUtilities.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I../../include/Ishiko/IO -std=c++11 ../../src/StreamUtilities.cpp
+
 clean:
+	rm -f $(_builddir)*.o
+	rm -f $(_builddir)*.d
 	rm -f ../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoIO-d,IshikoIO).a
 
 .PHONY: all clean
+
+# Dependencies tracking:
+-include $(_builddir)*.d
