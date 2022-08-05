@@ -21,8 +21,16 @@ program IshikoIOTests : IshikoIO, IshikoTestFrameworkCore
         libs += fmt boost_filesystem;
     }
 
+    headers
+    {
+        ../../src/IOErrorExtensionTests.hpp
+        ../../src/StreamUtilitiesTests.hpp
+    }
+
     sources
     {
+        ../../src/IOErrorExtensionTests.cpp
         ../../src/main.cpp
+        ../../src/StreamUtilitiesTests.cpp
     }
 }
