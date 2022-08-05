@@ -7,6 +7,7 @@
 #ifndef _ISHIKO_CPP_IO_HPP_
 #define _ISHIKO_CPP_IO_HPP_
 
+#include "IO/IOErrorCategory.hpp"
 #include "IO/linkoptions.hpp"
 
 #endif

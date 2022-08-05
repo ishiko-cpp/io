@@ -33,6 +33,11 @@ override CXXFLAGS += -O2
 else ifneq (,$(config))
 $(warning Unknown configuration "$(config)")
 endif
+#
+# Additionally, this makefile is customizable with the following
+# settings:
+#
+#      ISHIKO_CPP_ERRORS_ROOT  Path to the Ishiko Errors installation
 
 # Use "make RANLIB=''" for platforms without ranlib.
 RANLIB ?= ranlib
@@ -54,6 +59,16 @@ _builddir := $(if $(findstring $(abspath $(builddir)),$(builddir)),,../../)$(bui
 _builddir_error := $(shell mkdir -p $(_builddir) 2>&1)
 $(if $(_builddir_error),$(error Failed to create build directory: $(_builddir_error)))
 endif
+
+# ------------
+# Configurable settings:
+# 
+
+# Path to the Ishiko Errors installation
+ISHIKO_CPP_ERRORS_ROOT ?= $(ISHIKO_CPP)/errors
+
+# ------------
+
 all: ../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoIO-d,IshikoIO).a
 
 ../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoIO-d,IshikoIO).a: $(_builddir)IshikoIO_IOErrorCategory.o
@@ -61,7 +76,7 @@ all: ../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoIO-d,Ish
 	$(RANLIB) $@
 
 $(_builddir)IshikoIO_IOErrorCategory.o: ../../src/IOErrorCategory.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../include/Ishiko/IO -std=c++11 ../../src/IOErrorCategory.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I../../include/Ishiko/IO -std=c++11 ../../src/IOErrorCategory.cpp
 
 clean:
 	rm -f $(_builddir)*.o
