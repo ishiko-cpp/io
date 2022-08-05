@@ -56,12 +56,12 @@ $(if $(_builddir_error),$(error Failed to create build directory: $(_builddir_er
 endif
 all: ../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoIO-d,IshikoIO).a
 
-../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoIO-d,IshikoIO).a: $(_builddir)IshikoIO_IOErrorExtension.o
-	$(AR) rc $@ $(_builddir)IshikoIO_IOErrorExtension.o
+../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoIO-d,IshikoIO).a: $(_builddir)IshikoIO_IOErrorCategory.o
+	$(AR) rc $@ $(_builddir)IshikoIO_IOErrorCategory.o
 	$(RANLIB) $@
 
-$(_builddir)IshikoIO_IOErrorExtension.o: ../../src/IOErrorExtension.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../include/Ishiko/IO -std=c++11 ../../src/IOErrorExtension.cpp
+$(_builddir)IshikoIO_IOErrorCategory.o: ../../src/IOErrorCategory.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../include/Ishiko/IO -std=c++11 ../../src/IOErrorCategory.cpp
 
 clean:
 	rm -f $(_builddir)*.o

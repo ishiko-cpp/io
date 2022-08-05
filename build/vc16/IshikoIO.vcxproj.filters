@@ -28,7 +28,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\IOErrorExtension.cpp">
+    <ClCompile Include="..\..\src\IOErrorCategory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

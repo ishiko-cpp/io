@@ -37,6 +37,6 @@ library IshikoIO
 
     sources
     {
-        ../../src/IOErrorExtension.cpp
+        ../../src/IOErrorCategory.cpp
     }
 }
