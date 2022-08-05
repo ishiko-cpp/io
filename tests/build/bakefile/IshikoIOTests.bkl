@@ -17,12 +17,20 @@ program IshikoIOTests : IshikoIO, IshikoTestFrameworkCore
     if ($(toolset) == gnu)
     {
         cxx-compiler-options = "-std=c++11";
-        libs += IshikoTestFrameworkCore IshikoConfiguration IshikoXML IshikoFileSystem IshikoProcess IshikoTime IshikoText IshikoErrors;
+        libs += IshikoTestFrameworkCore IshikoConfiguration IshikoXML IshikoFileSystem IshikoIO IshikoProcess IshikoTime IshikoText IshikoErrors;
         libs += fmt boost_filesystem;
+    }
+
+    headers
+    {
+        ../../src/IOErrorExtensionTests.hpp
+        ../../src/StreamUtilitiesTests.hpp
     }
 
     sources
     {
+        ../../src/IOErrorExtensionTests.cpp
         ../../src/main.cpp
+        ../../src/StreamUtilitiesTests.cpp
     }
 }
