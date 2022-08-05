@@ -31,6 +31,12 @@ library IshikoIO
     headers
     {
         ../../include/Ishiko/IO.hpp
+        ../../include/Ishiko/IO/IOErrorCategory.hpp
         ../../include/Ishiko/IO/linkoptions.hpp
+    }
+
+    sources
+    {
+        ../../src/IOErrorExtension.cpp
     }
 }

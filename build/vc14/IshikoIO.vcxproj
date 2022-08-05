@@ -150,7 +150,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\IOErrorExtension.cpp" />
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="..\..\include\Ishiko\IO.hpp" />
+    <ClInclude Include="..\..\include\Ishiko\IO\IOErrorCategory.hpp" />
     <ClInclude Include="..\..\include\Ishiko\IO\linkoptions.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
