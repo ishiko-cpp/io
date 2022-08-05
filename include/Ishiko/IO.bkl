@@ -1,10 +1,13 @@
+ishikopath = envvar("ISHIKO_CPP");
+import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
+
 setting ISHIKO_CPP_IO_ROOT
 {
     help = "Path to the Ishiko/C++ IO installation";
     default = '$(ISHIKO_CPP)/io';
 }
 
-template IshikoIO
+template IshikoIO : IshikoErrors
 {
     includedirs += $(ISHIKO_CPP_IO_ROOT)/include;
 
