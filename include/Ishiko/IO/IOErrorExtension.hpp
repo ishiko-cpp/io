@@ -25,8 +25,8 @@ public:
     // TODO: this should be removed and the ErrorCategory should print this
     std::ostream& streamOut(std::ostream& os) const;
 
-    static void Fail(Error& error, EIOErrorCode code, const char* file, int line);
-    static void Fail(Error& error, const std::ios& status, const char* file, int line);
+    static void Fail(EIOErrorCode code, const char* file, int line, Error& error);
+    static void Fail(const std::ios& status, const char* file, int line, Error& error);
 
     EIOErrorCode code() const;
     

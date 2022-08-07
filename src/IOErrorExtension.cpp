@@ -10,9 +10,9 @@
 
 using namespace Ishiko;
 
-void IOErrorExtension::Fail(Error& error, EIOErrorCode code, const char* file, int line)
+void IOErrorExtension::Fail(EIOErrorCode code, const char* file, int line, Error& error)
 {
-    error.fail(EIO, IOErrorCategory::Get(), "", file, line);
+    error.fail(IOErrorCategory::Get(), EIO, "", file, line);
 
     IOErrorExtension* ext;
     if (error.extensions().tryGet(ext))
@@ -23,11 +23,11 @@ void IOErrorExtension::Fail(Error& error, EIOErrorCode code, const char* file, i
     }
 }
 
-void IOErrorExtension::Fail(Error& error, const std::ios& status, const char* file, int line)
+void IOErrorExtension::Fail(const std::ios& status, const char* file, int line, Error& error)
 {
     if (!status.good())
     {
-        error.fail(EIO, IOErrorCategory::Get(), "", file, line);
+        error.fail(IOErrorCategory::Get(), EIO, "", file, line);
 
         EIOErrorCode code = eError;
         if (status.eof())
