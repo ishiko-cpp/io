@@ -19,13 +19,13 @@ const char* IOErrorCategory::name() const noexcept
     return "Ishiko::IOErrorCategory";
 }
 
-void Ishiko::Fail(Error& error, IOErrorCategory::EErrorValues value) noexcept
+void Ishiko::Fail(IOErrorCategory::EErrorValues value, Error& error) noexcept
 {
-    error.fail(value, IOErrorCategory::Get());
+    error.fail(IOErrorCategory::Get(), value);
 }
 
-void Ishiko::Fail(Error& error, IOErrorCategory::EErrorValues value, const std::string& message, const char* file,
-    int line) noexcept
+void Ishiko::Fail(IOErrorCategory::EErrorValues value, const std::string& message, const char* file, int line,
+    Error& error) noexcept
 {
-    error.fail(value, IOErrorCategory::Get(), message, file, line);
+    error.fail(IOErrorCategory::Get(), value, message, file, line);
 }
