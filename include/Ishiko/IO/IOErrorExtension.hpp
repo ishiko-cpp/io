@@ -22,7 +22,8 @@ public:
         eEOF
     };
 
-    std::ostream& streamOut(std::ostream& os) const override;
+    // TODO: this should be removed and the ErrorCategory should print this
+    std::ostream& streamOut(std::ostream& os) const;
 
     static void Fail(Error& error, EIOErrorCode code, const char* file, int line);
     static void Fail(Error& error, const std::ios& status, const char* file, int line);

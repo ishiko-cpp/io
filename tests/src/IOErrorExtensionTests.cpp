@@ -145,10 +145,15 @@ void IOErrorExtensionTests::StreamInsertionTest1(Test& test)
     error.extensions().install<IOErrorExtension>();
     IOErrorExtension::Fail(error, IOErrorExtension::eEOF, "file1", 3);
 
+    const IOErrorExtension* extension;
+    bool found = error.extensions().tryGet(extension);
+
+    ISHIKO_TEST_ABORT_IF_NOT(found);
+
     std::stringstream errorMessage;
-    errorMessage << error;
+    extension->streamOut(errorMessage);
 
     ISHIKO_TEST_FAIL_IF_NOT(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(errorMessage.str(), "Ishiko::IOErrorCategory, 5, I/O error: end-of-file [file: file1, line: 3]");
+    ISHIKO_TEST_FAIL_IF_NEQ(errorMessage.str(), ", I/O error: end-of-file [file: file1, line: 3]");
     ISHIKO_TEST_PASS();
 }
