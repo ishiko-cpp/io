@@ -30,9 +30,9 @@ private:
     IOErrorCategory() noexcept = default;
 };
 
-void Fail(Error& error, IOErrorCategory::EErrorValues value) noexcept;
-void Fail(Error& error, IOErrorCategory::EErrorValues value, const std::string& message, const char* file,
-    int line) noexcept;
+void Fail(IOErrorCategory::EErrorValues value, Error& error) noexcept;
+void Fail(IOErrorCategory::EErrorValues value, const std::string& message, const char* file, int line,
+    Error& error) noexcept;
 
 }
 
