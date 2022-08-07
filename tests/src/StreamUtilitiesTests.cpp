@@ -27,7 +27,7 @@ void StreamUtilitiesTests::FailIfCreateFileErrorTest1(Test& test)
     Error error;
     std::fstream file("doesnotexist");
 
-    bool failed = FailIfCreateFileError(error, file);
+    bool failed = FailIfCreateFileError(file, error);
   
     ISHIKO_TEST_FAIL_IF_NOT(failed);
     ISHIKO_TEST_FAIL_IF_NOT(error);
@@ -54,10 +54,10 @@ void StreamUtilitiesTests::FailIfCreateFileErrorTest2(Test& test)
     // We try to open the file instead of creating it because this is easier to implement and puts the stream in the
     // same state
     Error error;
-    error.extensions().install<MessageErrorExtension>();
+    error.extensions().install<InfoErrorExtension>();
     std::fstream file(path);
 
-    bool failed = FailIfCreateFileError(error, file, path, "file1", 3);
+    bool failed = FailIfCreateFileError(file, path, "file1", 3, error);
 
     ISHIKO_TEST_FAIL_IF_NOT(failed);
     ISHIKO_TEST_FAIL_IF_NOT(error);
@@ -85,7 +85,7 @@ void StreamUtilitiesTests::FailIfOpenFileErrorTest1(Test& test)
     Error error;
     std::fstream file("doesnotexist");
 
-    bool failed = FailIfOpenFileError(error, file);
+    bool failed = FailIfOpenFileError(file, error);
 
     ISHIKO_TEST_FAIL_IF_NOT(failed);
     ISHIKO_TEST_FAIL_IF_NOT(error);
@@ -110,10 +110,10 @@ void StreamUtilitiesTests::FailIfOpenFileErrorTest2(Test& test)
     const char* path = "doesnotexist";
 
     Error error;
-    error.extensions().install<MessageErrorExtension>();
+    error.extensions().install<InfoErrorExtension>();
     std::fstream file(path);
 
-    bool failed = FailIfOpenFileError(error, file, path, "file1", 3);
+    bool failed = FailIfOpenFileError(file, path, "file1", 3, error);
 
     ISHIKO_TEST_FAIL_IF_NOT(failed);
     ISHIKO_TEST_FAIL_IF_NOT(error);

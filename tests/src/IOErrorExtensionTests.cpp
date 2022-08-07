@@ -36,7 +36,7 @@ void IOErrorExtensionTests::ConstructionTest1(Test& test)
 void IOErrorExtensionTests::FailTest1(Test& test)
 {
     Error error;
-    IOErrorExtension::Fail(error, IOErrorExtension::eEOF, "file1", 3);
+    IOErrorExtension::Fail(IOErrorExtension::eEOF, "file1", 3, error);
 
     ISHIKO_TEST_FAIL_IF_NEQ(error.condition().value(), EIO);
 
@@ -51,7 +51,7 @@ void IOErrorExtensionTests::FailTest2(Test& test)
 {
     Error error;
     error.extensions().install<IOErrorExtension>();
-    IOErrorExtension::Fail(error, IOErrorExtension::eEOF, "file1", 3);
+    IOErrorExtension::Fail(IOErrorExtension::eEOF, "file1", 3, error);
 
     ISHIKO_TEST_FAIL_IF_NEQ(error.condition().value(), EIO);
 
@@ -69,7 +69,7 @@ void IOErrorExtensionTests::FailTest3(Test& test)
     std::fstream file(inputPath.c_str());
 
     Error error;
-    IOErrorExtension::Fail(error, file, "file1", 3);
+    IOErrorExtension::Fail(file, "file1", 3, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(error.condition().value(), 0);
@@ -86,7 +86,7 @@ void IOErrorExtensionTests::FailTest4(Test& test)
     std::fstream file("doesnotexist");
 
     Error error;
-    IOErrorExtension::Fail(error, file, "file1", 3);
+    IOErrorExtension::Fail(file, "file1", 3, error);
 
     ISHIKO_TEST_FAIL_IF_NOT(error);
     ISHIKO_TEST_FAIL_IF_NEQ(error.condition().value(), EIO);
@@ -104,7 +104,7 @@ void IOErrorExtensionTests::FailTest5(Test& test)
 
     Error error;
     error.extensions().install<IOErrorExtension>();
-    IOErrorExtension::Fail(error, file, "file1", 3);
+    IOErrorExtension::Fail(file, "file1", 3, error);
 
     ISHIKO_TEST_FAIL_IF_NOT(error);
     ISHIKO_TEST_FAIL_IF_NEQ(error.condition().value(), EIO);
@@ -126,7 +126,7 @@ void IOErrorExtensionTests::FailTest6(Test& test)
 
     Error error;
     error.extensions().install<IOErrorExtension>();
-    IOErrorExtension::Fail(error, file, "file1", 3);
+    IOErrorExtension::Fail(file, "file1", 3, error);
 
     ISHIKO_TEST_FAIL_IF_NOT(error);
     ISHIKO_TEST_FAIL_IF_NEQ(error.condition().value(), EIO);
@@ -143,7 +143,7 @@ void IOErrorExtensionTests::StreamInsertionTest1(Test& test)
 {
     Error error;
     error.extensions().install<IOErrorExtension>();
-    IOErrorExtension::Fail(error, IOErrorExtension::eEOF, "file1", 3);
+    IOErrorExtension::Fail(IOErrorExtension::eEOF, "file1", 3, error);
 
     const IOErrorExtension* extension;
     bool found = error.extensions().tryGet(extension);
