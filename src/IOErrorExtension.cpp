@@ -45,7 +45,7 @@ void IOErrorExtension::Fail(Error& error, const std::ios& status, const char* fi
     }
 }
 
-std::ostream& IOErrorExtension::operator<<(std::ostream& os) const
+std::ostream& IOErrorExtension::streamOut(std::ostream& os) const
 {
     os << ", I/O error: ";
     switch (m_code)
