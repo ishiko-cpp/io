@@ -22,7 +22,7 @@ public:
         eEOF
     };
 
-    std::ostream& operator<<(std::ostream& os) const override;
+    std::ostream& streamOut(std::ostream& os) const override;
 
     static void Fail(Error& error, EIOErrorCode code, const char* file, int line);
     static void Fail(Error& error, const std::ios& status, const char* file, int line);
