@@ -15,23 +15,24 @@ namespace Ishiko
 class IOErrorCategory : public ErrorCategory
 {
 public:
-    enum EErrorValues
+    enum class Value
     {
-        eGenericError = -1,
-        eCreateFileError = -2,
-        eOpenFileError = -3
+        generic_error = -1,
+        create_file_error = -2,
+        open_file_error = -3
     };
 
     static const IOErrorCategory& Get() noexcept;
 
     const char* name() const noexcept override;
+    std::ostream& streamOut(int value, std::ostream& os) const override;
 
 private:
     IOErrorCategory() noexcept = default;
 };
 
-void Fail(IOErrorCategory::EErrorValues value, Error& error) noexcept;
-void Fail(IOErrorCategory::EErrorValues value, const std::string& message, const char* file, int line,
+void Fail(IOErrorCategory::Value value, Error& error) noexcept;
+void Fail(IOErrorCategory::Value value, const std::string& message, const char* file, int line,
     Error& error) noexcept;
 
 }
