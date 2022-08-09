@@ -19,13 +19,36 @@ const char* IOErrorCategory::name() const noexcept
     return "Ishiko::IOErrorCategory";
 }
 
-void Ishiko::Fail(IOErrorCategory::EErrorValues value, Error& error) noexcept
+std::ostream& IOErrorCategory::streamOut(int value, std::ostream& os) const
 {
-    error.fail(IOErrorCategory::Get(), value);
+    switch (static_cast<Value>(value))
+    {
+    case Value::generic_error:
+        os << "generic error";
+        break;
+
+    case Value::create_file_error:
+        os << "create file error";
+        break;
+
+    case Value::open_file_error:
+        os << "open file error";
+        break;
+
+    default:
+        os << "unknown value";
+        break;
+    }
+    return os;
 }
 
-void Ishiko::Fail(IOErrorCategory::EErrorValues value, const std::string& message, const char* file, int line,
+void Ishiko::Fail(IOErrorCategory::Value value, Error& error) noexcept
+{
+    error.fail(IOErrorCategory::Get(), static_cast<int>(value));
+}
+
+void Ishiko::Fail(IOErrorCategory::Value value, const std::string& message, const char* file, int line,
     Error& error) noexcept
 {
-    error.fail(IOErrorCategory::Get(), value, message, file, line);
+    error.fail(IOErrorCategory::Get(), static_cast<int>(value), message, file, line);
 }
