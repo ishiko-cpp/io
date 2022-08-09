@@ -19,7 +19,7 @@ bool Ishiko::FailIfCreateFileError(const std::ios& status, const std::string& pa
 {
     if (!status.good())
     {
-        Fail(IOErrorCategory::eCreateFileError, "failed to create file \'" + path + "\'", file, line, error);
+        Fail(IOErrorCategory::Value::create_file_error, "failed to create file \'" + path + "\'", file, line, error);
         return true;
     }
     else
@@ -38,7 +38,7 @@ bool Ishiko::FailIfOpenFileError(const std::ios& status, const std::string& path
 {
     if (!status.good())
     {
-        Fail(IOErrorCategory::eOpenFileError, "failed to open file \'" + path + "\'", file, line, error);
+        Fail(IOErrorCategory::Value::open_file_error, "failed to open file \'" + path + "\'", file, line, error);
         return true;
     }
     else
