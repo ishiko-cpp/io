@@ -37,7 +37,8 @@ endif
 # Additionally, this makefile is customizable with the following
 # settings:
 #
-#      ISHIKO_CPP_ERRORS_ROOT  Path to the Ishiko Errors installation
+#      ISHIKO_CPP_BASEPLATFORM_ROOT  Path to the Ishiko BasePlatform installation
+#      ISHIKO_CPP_ERRORS_ROOT        Path to the Ishiko Errors installation
 
 # Use "make RANLIB=''" for platforms without ranlib.
 RANLIB ?= ranlib
@@ -64,6 +65,8 @@ endif
 # Configurable settings:
 # 
 
+# Path to the Ishiko BasePlatform installation
+ISHIKO_CPP_BASEPLATFORM_ROOT ?= $(ISHIKO_CPP)/base-platform
 # Path to the Ishiko Errors installation
 ISHIKO_CPP_ERRORS_ROOT ?= $(ISHIKO_CPP)/errors
 
@@ -76,13 +79,13 @@ all: ../bakefile/../../lib/lib$(if $(call _equal,$(config),Debug),IshikoIO-d,Ish
 	$(RANLIB) $@
 
 $(_builddir)IshikoIO_IOErrorCategory.o: ../../src/IOErrorCategory.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I../../include/Ishiko/IO -std=c++11 ../../src/IOErrorCategory.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_BASEPLATFORM_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I../../include/Ishiko/IO -std=c++11 ../../src/IOErrorCategory.cpp
 
 $(_builddir)IshikoIO_IOErrorExtension.o: ../../src/IOErrorExtension.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I../../include/Ishiko/IO -std=c++11 ../../src/IOErrorExtension.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_BASEPLATFORM_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I../../include/Ishiko/IO -std=c++11 ../../src/IOErrorExtension.cpp
 
 $(_builddir)IshikoIO_StreamUtilities.o: ../../src/StreamUtilities.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I../../include/Ishiko/IO -std=c++11 ../../src/StreamUtilities.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_BASEPLATFORM_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I../../include/Ishiko/IO -std=c++11 ../../src/StreamUtilities.cpp
 
 clean:
 	rm -f $(_builddir)*.o
