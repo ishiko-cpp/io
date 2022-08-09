@@ -39,7 +39,7 @@ void StreamUtilitiesTests::FailIfCreateFileErrorTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(messsageFound);
 
-    const char* originFile = nullptr;
+    ErrorString originFile;
     int originLine = -1;
     bool originFound = error.tryGetOrigin(originFile, originLine);
 
@@ -70,12 +70,12 @@ void StreamUtilitiesTests::FailIfCreateFileErrorTest2(Test& test)
     ISHIKO_TEST_FAIL_IF_NOT(messsageFound);
     ISHIKO_TEST_FAIL_IF_NEQ(message, "failed to create file 'doesnotexist'");
 
-    const char* originFile = nullptr;
+    ErrorString originFile;
     int originLine = -1;
     bool origin = error.tryGetOrigin(originFile, originLine);
 
     ISHIKO_TEST_FAIL_IF_NOT(origin);
-    ISHIKO_TEST_FAIL_IF_STR_NEQ(originFile, "file1");
+    ISHIKO_TEST_FAIL_IF_NEQ(originFile, "file1");
     ISHIKO_TEST_FAIL_IF_NEQ(originLine, 3);
     ISHIKO_TEST_PASS();
 }
@@ -97,7 +97,7 @@ void StreamUtilitiesTests::FailIfOpenFileErrorTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(messsageFound);
 
-    const char* originFile = nullptr;
+    ErrorString originFile;
     int originLine = -1;
     bool originFound = error.tryGetOrigin(originFile, originLine);
 
@@ -126,12 +126,12 @@ void StreamUtilitiesTests::FailIfOpenFileErrorTest2(Test& test)
     ISHIKO_TEST_FAIL_IF_NOT(messsageFound);
     ISHIKO_TEST_FAIL_IF_NEQ(message, "failed to open file 'doesnotexist'");
 
-    const char* originFile = nullptr;
+    ErrorString originFile;
     int originLine = -1;
     bool origin = error.tryGetOrigin(originFile, originLine);
 
     ISHIKO_TEST_FAIL_IF_NOT(origin);
-    ISHIKO_TEST_FAIL_IF_STR_NEQ(originFile, "file1");
+    ISHIKO_TEST_FAIL_IF_NEQ(originFile, "file1");
     ISHIKO_TEST_FAIL_IF_NEQ(originLine, 3);
     ISHIKO_TEST_PASS();
 }
