@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2020-2022 Xavier Leclercq
+    Copyright (c) 2020-2024 Xavier Leclercq
     Released under the MIT License
     See https://github.com/ishiko-cpp/io/blob/main/LICENSE.txt
 */
@@ -19,27 +19,22 @@ const char* IOErrorCategory::name() const noexcept
     return "Ishiko::IOErrorCategory";
 }
 
-std::ostream& IOErrorCategory::streamOut(int value, std::ostream& os) const
+const char* IOErrorCategory::message(int ev, char* buffer, size_t len) const noexcept
 {
-    switch (static_cast<Value>(value))
+    switch (static_cast<Value>(ev))
     {
     case Value::generic_error:
-        os << "generic error";
-        break;
+        return "generic error";
 
     case Value::create_file_error:
-        os << "create file error";
-        break;
+        return "create file error";
 
     case Value::open_file_error:
-        os << "open file error";
-        break;
+        return "open file error";
 
     default:
-        os << "unknown value";
-        break;
+        return "unknown value";
     }
-    return os;
 }
 
 void Ishiko::Fail(IOErrorCategory::Value value, Error& error) noexcept
