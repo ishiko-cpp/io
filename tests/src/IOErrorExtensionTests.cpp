@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019-2022 Xavier Leclercq
+    Copyright (c) 2019-2024 Xavier Leclercq
     Released under the MIT License
     See https://github.com/ishiko-cpp/io/blob/main/LICENSE.txt
 */
@@ -38,7 +38,7 @@ void IOErrorExtensionTests::FailTest1(Test& test)
     Error error;
     IOErrorExtension::Fail(IOErrorExtension::eEOF, "file1", 3, error);
 
-    ISHIKO_TEST_FAIL_IF_NEQ(error.condition().value(), EIO);
+    ISHIKO_TEST_FAIL_IF_NEQ(error.code().value(), EIO);
 
     const IOErrorExtension* extension;
     bool found = error.extensions().tryGet(extension);
@@ -53,7 +53,7 @@ void IOErrorExtensionTests::FailTest2(Test& test)
     error.extensions().install<IOErrorExtension>();
     IOErrorExtension::Fail(IOErrorExtension::eEOF, "file1", 3, error);
 
-    ISHIKO_TEST_FAIL_IF_NEQ(error.condition().value(), EIO);
+    ISHIKO_TEST_FAIL_IF_NEQ(error.code().value(), EIO);
 
     const IOErrorExtension* extension;
     bool found = error.extensions().tryGet(extension);
@@ -72,7 +72,7 @@ void IOErrorExtensionTests::FailTest3(Test& test)
     IOErrorExtension::Fail(file, "file1", 3, error);
 
     ISHIKO_TEST_FAIL_IF(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(error.condition().value(), 0);
+    ISHIKO_TEST_FAIL_IF_NEQ(error.code().value(), 0);
 
     const IOErrorExtension* extension;
     bool found = error.extensions().tryGet(extension);
@@ -89,7 +89,7 @@ void IOErrorExtensionTests::FailTest4(Test& test)
     IOErrorExtension::Fail(file, "file1", 3, error);
 
     ISHIKO_TEST_FAIL_IF_NOT(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(error.condition().value(), EIO);
+    ISHIKO_TEST_FAIL_IF_NEQ(error.code().value(), EIO);
 
     const IOErrorExtension* extension;
     bool found = error.extensions().tryGet(extension);
@@ -107,7 +107,7 @@ void IOErrorExtensionTests::FailTest5(Test& test)
     IOErrorExtension::Fail(file, "file1", 3, error);
 
     ISHIKO_TEST_FAIL_IF_NOT(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(error.condition().value(), EIO);
+    ISHIKO_TEST_FAIL_IF_NEQ(error.code().value(), EIO);
     
     const IOErrorExtension* extension;
     bool found = error.extensions().tryGet(extension);
@@ -129,7 +129,7 @@ void IOErrorExtensionTests::FailTest6(Test& test)
     IOErrorExtension::Fail(file, "file1", 3, error);
 
     ISHIKO_TEST_FAIL_IF_NOT(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(error.condition().value(), EIO);
+    ISHIKO_TEST_FAIL_IF_NEQ(error.code().value(), EIO);
 
     const IOErrorExtension* extension;
     bool found = error.extensions().tryGet(extension);

@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2021-2022 Xavier Leclercq
+    Copyright (c) 2021-2024 Xavier Leclercq
     Released under the MIT License
     See https://github.com/ishiko-cpp/io/blob/main/LICENSE.txt
 */
@@ -31,8 +31,8 @@ void StreamUtilitiesTests::FailIfCreateFileErrorTest1(Test& test)
   
     ISHIKO_TEST_FAIL_IF_NOT(failed);
     ISHIKO_TEST_FAIL_IF_NOT(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(error.condition().value(), -2);
-    ISHIKO_TEST_FAIL_IF_NEQ(&error.condition().category(), &IOErrorCategory::Get());
+    ISHIKO_TEST_FAIL_IF_NEQ(error.code().value(), -2);
+    ISHIKO_TEST_FAIL_IF_NEQ(&error.code().category(), &IOErrorCategory::Get());
 
     std::string message;
     bool messsageFound = error.tryGetMessage(message);
@@ -61,8 +61,8 @@ void StreamUtilitiesTests::FailIfCreateFileErrorTest2(Test& test)
 
     ISHIKO_TEST_FAIL_IF_NOT(failed);
     ISHIKO_TEST_FAIL_IF_NOT(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(error.condition().value(), -2);
-    ISHIKO_TEST_FAIL_IF_NEQ(&error.condition().category(), &IOErrorCategory::Get());
+    ISHIKO_TEST_FAIL_IF_NEQ(error.code().value(), -2);
+    ISHIKO_TEST_FAIL_IF_NEQ(&error.code().category(), &IOErrorCategory::Get());
 
     std::string message;
     bool messsageFound = error.tryGetMessage(message);
@@ -89,8 +89,8 @@ void StreamUtilitiesTests::FailIfOpenFileErrorTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF_NOT(failed);
     ISHIKO_TEST_FAIL_IF_NOT(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(error.condition().value(), -3);
-    ISHIKO_TEST_FAIL_IF_NEQ(&error.condition().category(), &IOErrorCategory::Get());
+    ISHIKO_TEST_FAIL_IF_NEQ(error.code().value(), -3);
+    ISHIKO_TEST_FAIL_IF_NEQ(&error.code().category(), &IOErrorCategory::Get());
 
     std::string message;
     bool messsageFound = error.tryGetMessage(message);
@@ -117,8 +117,8 @@ void StreamUtilitiesTests::FailIfOpenFileErrorTest2(Test& test)
 
     ISHIKO_TEST_FAIL_IF_NOT(failed);
     ISHIKO_TEST_FAIL_IF_NOT(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(error.condition().value(), -3);
-    ISHIKO_TEST_FAIL_IF_NEQ(&error.condition().category(), &IOErrorCategory::Get());
+    ISHIKO_TEST_FAIL_IF_NEQ(error.code().value(), -3);
+    ISHIKO_TEST_FAIL_IF_NEQ(&error.code().category(), &IOErrorCategory::Get());
 
     std::string message;
     bool messsageFound = error.tryGetMessage(message);
