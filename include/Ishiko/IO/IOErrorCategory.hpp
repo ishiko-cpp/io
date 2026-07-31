@@ -28,7 +28,7 @@ public:
     const char* message(int ev, char* buffer, size_t len) const noexcept override;
 
 private:
-    IOErrorCategory() noexcept = default;
+    IOErrorCategory() noexcept;
 };
 
 void Fail(IOErrorCategory::Value value, Error& error) noexcept;
